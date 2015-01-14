@@ -1,0 +1,40 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<p>
+  <strong>订单号：</strong>
+  <%= @ship.order_id %>
+</p>
+
+<p>
+  <strong>发货日期</strong>
+  <%= @ship.send_date %>
+</p>
+
+<p>
+  <strong>发货人</strong>
+  <%= @ship.sender %>
+</p>
+
+<p>
+  <strong>快递公司：</strong>
+  <%= @ship.express_company %>
+</p>
+
+<p>
+  <strong>快递单：</strong>
+  <%= @ship.express_number %>
+</p>
+
+<p>
+  <strong>是否收货：</strong>
+  <% if @ship.is_receive == nil %>
+    还未收货
+  <% else %>
+    已经收货
+  <% end %>
+</p>
+<% if @ship.is_receive == nil %>
+  <%= button_to '确认收到货物', ships_confirm_receive_path(id: @ship.id) %> 
+<% end %>
+<%= link_to '回到用户中心', user_path(id: @ship.order.user.id) %>

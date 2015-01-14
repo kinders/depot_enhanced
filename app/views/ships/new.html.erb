@@ -1,0 +1,35 @@
+<h1>创建发货单</h1>
+<strong>请核对如下商品</strong>
+<table>
+  <thead>
+    <tr>
+      <td>商品名称</td>
+      <td>商品价格</td>
+      <td>商品数量</td>
+  </thead>
+  <tbody>
+  <% @want_ship_products.each do |w| %>
+    <tr>
+      <td><%= w[0] %></td>
+      <td><%= w[1] %></td>
+      <td><%= w[2] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<strong>请核对如下货运信息</strong>
+<table>
+  <thead>
+    <tr>
+      <td>收件人</td>
+      <td>收件地址</td>
+  </thead>
+  <tbody>
+    <td><%= @want_ship_order.name %></td>
+    <td><%= @want_ship_order.address %></td>
+  </tbody>
+</table>
+<strong>下面输入发货单信息</strong>
+<%= render 'form' %>
+
+<%= link_to '返回中心', ships_path %>

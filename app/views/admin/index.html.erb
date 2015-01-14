@@ -1,0 +1,23 @@
+<h1>欢迎</h1>
+<p>现在是 <%= Time.now %></p>
+<p>现在，系统上已经有了 <%= @total_orders %> 个订单。</p>
+<p>其中，还有 <%= @unship_orders %> 个订单仍未发货。</p>
+<table>
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>订购时间</th>
+      <th>发货</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @not_ship_orders.each do |product| %>
+      <tr>
+	<td><%= product[0] %></td>
+	<td><%= product[1] %></td>
+        <td><%= link_to '发货', new_ship_path(order_id: product[0]) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

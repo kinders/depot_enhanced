@@ -1,0 +1,37 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<h2>我的购物车</h2>
+<table>
+  <tr>
+    <td>商品名称</td>
+    <td>单价</td>
+    <td style='text-align: center;'>数量</td>
+    <td>合计</td>
+    <td colspan="5", style='text-align: center;'>更改数量</td>
+  <% @cart.line_items.each do |item| %>
+  <tr>
+    <td><%= item.product.title %></td>
+    <td><%= item.price %></td>
+    <td>
+      <%= form_for item do |f| %>
+	<%= f.text_field :quantity, size: 1 %>
+	<%= f.submit '✓', style: 'border-style: none;' %>
+      <% end %>
+    </td>
+    <td class="item_price"><%= item.total_price %></td>
+    <td><button class="add_one" style='border-style: none;'>+</button></td> 
+    <td><button class="subtract_one" style='border-style: none;'>-</button></td> 
+    <td><%= button_to '删除', item, method: :delete, data: { confirm: '您确定要删除该商品吗？'}, style: 'border-style: none;' %></td>
+  </tr>
+<% end %>
+  <tr class="total_line">
+    <td colspan="3">总计</td>
+    <td class="total_cell"><%= @cart.total_price %></td>
+    <td colspan="3"> <%= button_to '清空商品', @cart, method: :delete, data: { confirm: '您确定要清空所有选购的商品吗？' }, style: 'border-style: none;' %></td>
+  </tr>
+  <tr>
+    <td colspan="3"> <%= button_to '接着购物', store_url, method: :get, style: 'border-style: none;'%></td>
+    <td colspan="3"> <%= button_to '提交订单', new_order_path, method: :get, style: 'border-style: none;'%></td>
+  </tr>
+</table>

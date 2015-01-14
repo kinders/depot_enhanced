@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order: one
+  send_date: 2015-01-11
+  sender: MyString
+  express_company: MyString
+  express_number: MyString
+  is_receive: false
+
+two:
+  order_id: 
+  send_date: 2015-01-11
+  sender: MyString
+  express_company: MyString
+  express_number: MyString
+  is_receive: false

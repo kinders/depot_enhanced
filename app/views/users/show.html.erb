@@ -1,0 +1,73 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+<p>
+  <strong>这里是<%= @user.name %>的私人空间！</strong>
+</p>
+<%= link_to '更新密码', edit_user_path(@user) %>
+<p>知道吗？系统上已经有了<%= @total_orders %>个订单！</p>
+<p></p>
+<% if @my_total_orders %>
+<p>我贡献了其中的 <%= @my_total_orders %> 个订单：</p>
+
+<% if @my_unend_products.count > 0 %>
+<p>下面是还未完成交易的<%= @my_unend_products.count %>个商品：</p>
+<table>
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>商品名称</th>
+      <th>商品价格</th>
+      <th>商品数量</th>
+      <th>订购时间</th>
+      <th>发货状态</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @my_unend_products.each do |product| %>
+      <tr>
+	<td><%= product[0] %></td>
+	<td><%= product[1] %></td>
+	<td style="text-align: right"><%= product[2] %></td>
+	<td style="text-align: center"><%= product[3] %></td>
+	<td><%= product[4] %></td>
+        <% if product[5] %>
+	  <td><%= link_to "查看快递信息", controller: "ships", action: 'show', id: product[6] %></td>
+        <% else %>
+	  <td>未发货</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+
+<% if @my_ended_products.count > 0 %>
+<p>下面是已经完成交易的<%= @my_ended_products.count %>个商品：</p>
+<table>
+  <thead>
+    <tr>
+      <th>订单编号</th>
+      <th>商品名称</th>
+      <th>商品价格</th>
+      <th>商品数量</th>
+      <th>订购时间</th>
+      <th>物流状态</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @my_ended_products.each do |product| %>
+      <tr>
+	<td><%= product[0] %></td>
+	<td><%= product[1] %></td>
+	<td style="text-align: right"><%= product[2] %></td>
+	<td style="text-align: center"><%= product[3] %></td>
+	<td><%= product[4] %></td>
+	<td><%= link_to "查看快递信息", controller: "ships", action: 'show', id: product[5] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<% end %>

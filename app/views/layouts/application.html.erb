@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pragprog在线书店</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller.controller_name %>">
+  <div id="banner">
+    <%= image_tag("logo.jpg") %>
+    <%= @page_title || "实务书架" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+      <ul>
+        <li><%= button_to '主页', store_url, method: :get, style: 'border-style: none;' %></li>
+        <li><a href="http://www..../news">最新资讯</a></li>
+        <li><a href="http://www..../faq">常见问题</a></li>
+        <li><a href="http://www..../contact">联系商店</a></li>
+        <% if session[:user_id] %>
+	<li><%=link_to "欢迎您！#{@user_name}", user_path(id: session[:user_id]) %></li>
+	<li><%=link_to "退出登录!", logout_url, method: :delete %></li>
+        <% else %>
+	<li><%= link_to '登录系统', login_url, method: :get %></li>
+	<li><%= link_to '注册用户', new_user_path %></li>
+	<% end %>
+        <% if session[:cart_id] %>
+	  <li><%=link_to "我的购物车", cart_path(id: session[:cart_id]) %>!</li>
+	<% end %>
+      </ul>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+<%= form_for(@administrator) do |f| %>
+  <% if @administrator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@administrator.errors.count, "error") %> prohibited this administrator from being saved:</h2>
+
+      <ul>
+      <% @administrator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label '用户名字' %><br>
+    <%= f.select :name, User.names, prompt: "请选择一位用户" %>
+  </div>
+  <div class="actions">
+    <%= f.submit '提升为管理员' %>
+  </div>
+<% end %>
